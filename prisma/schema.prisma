@@ -46,7 +46,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   password       String?
-  createdAt      DateTime @default(now())
+  createdAt      DateTime? @default(now())
   reminders      Reminder[]
 }
 

@@ -14,10 +14,10 @@ const Header = async () => {
             <h1 className='text-white text-3xl ml-2 my-2 font-montserrat'>Ben+</h1>
             <div className="ml-auto mr-2 flex">
                 <SignInButton user={session?.user}/>
-                {/* <SettingsLink/> */}
+                <SettingsLink/>
             </div>
         </div>
-        {/* <Navbar/> */}
+        <Navbar/>
     </header>
   )
 }
