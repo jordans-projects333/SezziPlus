@@ -7,3 +7,28 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --accountFormInputBorder: #B23928;
+  --secondary: white;
+}
+
+body{
+   background: linear-gradient(black 0%, #0f0f0f 30%);
+   min-height: 100vh;
+}
+
+.accountModel{
+  width: min(80%, 400px);
+  /* background: linear-gradient(black 0%, #303030 30%); */
+  background-color: black;
+  border: 1px solid white;
+}
+
+.model{
+  width: min(80%, 400px);
+}
+
+.shadowButton{
+  box-shadow: 0px 16px 25px rgba(0, 0, 0, 0.3)
+}
