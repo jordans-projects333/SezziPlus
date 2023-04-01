@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
             if (!user) {
                 throw new Error('Email not found')
             }
-            const comparePasswords = await compare(credentials.password, user.password)
+            const comparePasswords = await compare(credentials!.password!, user!.password!)
             if(!comparePasswords){
                 throw new Error('Password is incorrect')
             }

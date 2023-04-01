@@ -52,9 +52,9 @@ const SignInForm = () => {
         <motion.form exit={{opacity: 0}} animate={{opacity: 1}} initial={{opacity: 0}} onSubmit={(e) => handleSubmit(e)} className={'flex flex-col w-[85%] mx-auto mt-8'}>
             <div className="flex flex-col gap-8">
                 <InputField valid={emailValid} fieldName={'Email'} errorMessage={emailError} fieldRef={emailInput} 
-                            setValid={setEmailValid} setError={setEmailError} inputMaxLength={35} inputType={'email'}/>
+                            setValid={setEmailValid} setError={setEmailError} inputMaxLength={35} inputType={'email'} requestLoading={requestLoading}/>
                 <InputField valid={passwordValid} fieldName={'Password'} errorMessage={passwordError} fieldRef={passwordInput} 
-                            setValid={setPasswordValid} setError={setPasswordError} inputMaxLength={15} inputType={'password'}/>
+                            setValid={setPasswordValid} setError={setPasswordError} inputMaxLength={15} inputType={'password'} requestLoading={requestLoading}/>
             </div>
             <p className="text-red-500 text-center mb-1 mt-2">{serverError}</p>
             <button type='submit' value={'login'} className={`${requestLoading && 'scale-90'} text-white w-[30%] mx-auto mt-2 text-2xl duration-200 hover:text-[1.4rem]`}>
