@@ -2,7 +2,7 @@
 
 import { useStore } from "@/Zustand/store"
 import { DefaultSession } from "next-auth";
-import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 type Props = {
     user?: DefaultSession["user"],
@@ -18,7 +18,7 @@ const SignInButton = ({user}: Props) => {
         <button className="text-white mr-4 font-openSans font-medium" onClick={() => handleAccountModelToggle()}>Sign in</button>
     )
     return(
-        <button onClick={() => signOut()} className="text-white mr-4 font-openSans font-medium">{user?.name}</button>
+        <Link href='/Settings' className="text-white mr-4 font-openSans font-medium">{user?.name}</Link>
     )
 }
 
