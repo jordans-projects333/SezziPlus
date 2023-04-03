@@ -1,9 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    appDir: true,
-    serverComponentsExternalPackages: ['@prisma/client', 'bcrypt']
-  },
-}
+const withPWA = require("@ducanh2912/next-pwa").default({
+  dest: "public",
+});
 
-module.exports = nextConfig
+/** @type {import("next").NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', 'bcrypt'],
+    appDir: true,
+  },
+};
+
+module.exports = withPWA(nextConfig);
