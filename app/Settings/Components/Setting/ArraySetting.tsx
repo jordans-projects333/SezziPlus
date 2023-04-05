@@ -15,9 +15,9 @@ const ArraySetting = ({title, options, defaultValue}: Props) => {
         
     }
     return (
-        <li className='flex justify-between items-center'>
-            <p>{title}</p>
-            <button onClick={() => handleClick()}>{options[currentIndex]}</button>
+        <li className='flex'>
+            <button className="flex flex-1" onTouchEnd={()=> handleClick()}>{title}</button>
+            <button onTouchEnd={() => handleClick()}>{options[currentIndex]}</button>
         </li>
     )
 }

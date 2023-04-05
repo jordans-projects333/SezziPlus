@@ -32,13 +32,13 @@ const YesNoSetting = ({title, yesFunction}: Props) => {
     }
     return (
         <li ref={blackListedElementRef} className="flex justify-between items-center w-full">
-            <motion.button onClick={() => handleToggle()} variants={varients} animate={active ? 'active' : 'inactive'} 
-                    className={`${active && 'text-[#B23928]'} flex duration-200`}>
+            <motion.button onTouchEnd={() => handleToggle()} variants={varients} animate={active ? 'active' : 'inactive'} 
+                    className={`${active && 'text-[#B23928]'} flex flex-1 duration-200`}>
                 <h3>{title}</h3>
                 <AnimatePresence mode="wait">{active && <motion.h3 initial={{opacity: 0}} exit={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.4}}}>?</motion.h3>}</AnimatePresence>
             </motion.button>
-            <AnimatePresence mode="wait">{active ? 
-                <motion.div exit={{opacity: 0}} animate={{opacity: 1, transition: {duration: 1}}} initial={{opacity: 0}} className="flex">
+            <AnimatePresence mode="wait" initial={false}>{active ? 
+                <motion.div exit={{opacity: 0}} animate={{opacity: 1, transition: {duration: 1}}} initial={{opacity: 0}} className="flex z-10">
                     <button onClick={() => yesFunction()}>Yes</button>
                     <p className="mx-2">/</p>
                     <button onClick={() => handleToggle()}>No</button>
