@@ -22,7 +22,6 @@ body{
   width: min(80%, 400px);
   /* background: linear-gradient(black 0%, #303030 30%); */
   background-color: black;
-  border: 1px solid white;
 }
 
 .model{

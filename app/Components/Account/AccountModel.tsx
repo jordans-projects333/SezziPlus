@@ -23,7 +23,7 @@ const AccountModel = () => {
     }
     return (
         <RisingFallingModel active={accountModelToggle} cancelFunction={handleAccountModelToggle} fadedBackgroundRef={fadedBackground}
-                            tailwindStyles={'top-[10%] pb-8 accountModel'}>
+                            tailwindStyles={'top-[10%] pb-8 accountModel border-zinc-600 border'}>
             <div className="flex mt-4 border-b border-white w-[90%] mx-auto pb-2">
                 <button className={`flex-1 duration-200 ${!accountToggle ? 'text-white text-lg hover:text-xl' : 'text-[#B23928] text-2xl'}`} onClick={() => setAccountToggle(true)}>Sign in</button>
                 <button className={`flex-1 duration-200 ${accountToggle ? 'text-white text-lg hover:text-xl' : 'text-[#B23928] text-2xl'}`} onClick={() => setAccountToggle(false)}>Register</button>

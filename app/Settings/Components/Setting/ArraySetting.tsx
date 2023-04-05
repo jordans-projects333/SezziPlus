@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import { useStore } from "@/Zustand/store"
 
 type Props = {
     title: string,
@@ -10,7 +11,13 @@ type Props = {
 
 const ArraySetting = ({title, options, defaultValue}: Props) => {
     const [currentIndex, setCurrentIndex] = useState(defaultValue)
+    const { confirmSettingsModel } = useStore()
     const handleClick = () => {
+        if(!confirmSettingsModel){
+            useStore.setState(() => ({
+              confirmSettingsModel : true
+            }))
+          }
         setCurrentIndex((prev) => ((prev+1)%options.length))
         
     }

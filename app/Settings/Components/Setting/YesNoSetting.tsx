@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRef, useState } from "react"
+import { useStore } from '@/Zustand/store'
 
 const varients = {
     active: { x: 16},

@@ -29,7 +29,7 @@ const AreYouSureModel = ({active, actionText, fadedBackgroundRef, cancelFunction
     }
     return (
         <RisingFallingModel active={active} cancelFunction={cancelModel} fadedBackgroundRef={fadedBackgroundRef}
-                            tailwindStyles={'top-[20%] py-4 flex flex-col px-4 bg-black border border-white w-[80%]'}>
+                            tailwindStyles={'top-[20%] py-4 flex flex-col px-4 bg-black border border-zinc-600 w-[80%]'}>
             {passwordForm ? 
                 <CheckPassword sureFunction={sureFunction} cancelPressed={PasswordFormCancel}/>
             :

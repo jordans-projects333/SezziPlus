@@ -7,7 +7,6 @@ type Props = {
 
 const CheckPassword = ({sureFunction, cancelPressed}: Props) => {
     const handleSubmit = (e: any) => {
-        console.log('aaaahhhh')
         e.preventDefault()
         sureFunction()
     }

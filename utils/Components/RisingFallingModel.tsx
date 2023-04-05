@@ -19,7 +19,7 @@ type Props = {
 
 const RisingFallingModel = ({children, active, cancelFunction, fadedBackgroundRef, tailwindStyles}: Props) => {
     return (
-        <motion.div ref={fadedBackgroundRef} className={`fixed z-50 w-[100%] h-[100lvh] bg-black/70 top-0 ${!active && ' pointer-events-none'} opacity-0`}
+        <motion.div ref={fadedBackgroundRef} className={`fixed z-50 w-[100%] h-[100lvh] bg-black/70 backdrop-blur-[2px] top-0 ${!active && ' pointer-events-none'} opacity-0`}
                     variants={varients} animate={active ? 'visible' : 'invisible'} onClick={(e) => cancelFunction(e)}>
             <motion.div variants={varients} animate={active ? 'active' : 'inactive'} 
                     className={'absolute left-[50%] translate-x-[-50%] translate-y-[100vh] ' + tailwindStyles}>

@@ -4,7 +4,7 @@ import { create } from 'zustand'
 
 export const useStore = create((set) => ({
     pageTransitioning: false,
-    currentPathname: '',
+    confirmSettingsModel: false,
     alertMessage: '',
     alertActive: false,
     accountModelToggle: false,
