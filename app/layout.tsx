@@ -7,6 +7,7 @@ import '../public/manifest.json'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/route'
 import Alert from './Components/Alert/Alert'
+import ExitPageTransitions from '@/utils/Components/ExitPageTransition';
 
 const APP_NAME = "SezziPlus";
 const APP_DESCRIPTION = "Partnership utilities";
@@ -41,7 +42,9 @@ export default async function RootLayout({ children }: {children: React.ReactNod
       <body>
         <ClientSessionProvider>
           <Header/>
+          <ExitPageTransitions>
           {children}
+          </ExitPageTransitions>
           {!session && <AccountModel/>}
           <Alert/>
         </ClientSessionProvider>

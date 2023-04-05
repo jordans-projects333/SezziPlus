@@ -11,7 +11,7 @@ const Header = async () => {
   return (
     <header className='flex flex-col bg-black'>
         <div className="flex items-center">
-            <h1 className='text-white text-3xl ml-2 my-2 font-montserrat'>+</h1>
+            <h1 className='text-white text-3xl ml-2 my-2 font-montserrat'>Sezzi+</h1>
             <div className="ml-auto mr-2 flex">
                 <SignInButton user={session?.user}/>
                 <SettingsLink/>

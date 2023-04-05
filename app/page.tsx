@@ -7,13 +7,9 @@ import { useSession } from 'next-auth/react'
 
 export default function Home() {
   const {data:session} = useSession()
-  console.log(session)
-  const sendData = async () => {
-    
-  }
   return (
     <main>
-      <button onClick={() => sendData()}></button>
+      <h3 className='text-white text-3xl fadeIntro'>Hello</h3>
     </main>
   )
 }

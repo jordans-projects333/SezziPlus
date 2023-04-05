@@ -2,7 +2,7 @@ import React from 'react'
 
 const NotesPage = () => {
   return (
-    <div>NotesPage</div>
+    <div className='text-white fadeIntro'>NotesPage</div>
   )
 }
 
