@@ -18,7 +18,7 @@ const YesNoSetting = ({title, yesFunction}: Props) => {
     const handleToggle = () => {
         if(!active){
             setActive(true)
-            window.addEventListener('touchstart', touchEventFunction)
+            document.addEventListener('touchend', touchEventFunction)
         }else{
             setActive(false)
         }
@@ -27,12 +27,12 @@ const YesNoSetting = ({title, yesFunction}: Props) => {
     const dismiss = (e: { target: any }) => {
         if(!blackListedElementRef.current!.contains(e.target)){
             setActive(false)
-            window.removeEventListener('touchstart', touchEventFunction)
+            document.removeEventListener('touchend', touchEventFunction)
         }
     }
     return (
         <li ref={blackListedElementRef} className="flex justify-between items-center w-full">
-            <motion.button onTouchEnd={() => handleToggle()} variants={varients} animate={active ? 'active' : 'inactive'} 
+            <motion.button onClick={() => handleToggle()} variants={varients} animate={active ? 'active' : 'inactive'} 
                     className={`${active && 'text-[#B23928]'} flex flex-1 duration-200`}>
                 <h3>{title}</h3>
                 <AnimatePresence mode="wait">{active && <motion.h3 initial={{opacity: 0}} exit={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.4}}}>?</motion.h3>}</AnimatePresence>
