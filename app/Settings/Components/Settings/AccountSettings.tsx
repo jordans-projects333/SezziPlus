@@ -39,7 +39,7 @@ const AccountSettings = () => {
         setChangeAccountDataModel(false)
     }
     return (
-        <div className='text-lg pl-2 pr-4'>
+        <div className='text-lg pl-2 pr-4 pt-2'>
             <AreYouSureModel active={areYouSureModel} actionText={areYouSureText} fadedBackgroundRef={fadedBackground} 
                              cancelFunction={cancelAreYouSureModel} sureFunction={areYouSureFunction} passwordRequired={true}/>
             <ChangeAccountData title={changeAccountDataTitle} active={changeAccountDataModel} cancelFunction={cancelFunction} labelText={changeAccountDatLabel}/>

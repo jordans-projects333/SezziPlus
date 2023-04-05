@@ -24,8 +24,16 @@ body{
   background-color: black;
 }
 
+.fadeOutDiv{
+  background: linear-gradient(black 0%, rgba(0, 0, 0, 0) 90%);
+}
+
 .model{
   width: min(80%, 400px);
+}
+
+.yooo{
+  scroll-snap-points-y: repeat(60vh);
 }
 
 .shadowButton{
@@ -43,4 +51,33 @@ body{
   100%{
     opacity: 1;
   }
+}
+
+.parent {
+  overflow: scroll;
+  height: 100vh;
+  scroll-snap-points-y: repeat(50vh);
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  height: 50vh;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.one {
+  background-color: red;
+}
+
+.two {
+  background-color: blue;
+}
+
+.three {
+  background-color: grey;
+}
+
+.four {
+  background-color: green;
 }

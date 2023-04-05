@@ -23,8 +23,8 @@ const ArraySetting = ({title, options, defaultValue}: Props) => {
     }
     return (
         <li className='flex'>
-            <button className="flex flex-1" onTouchEnd={()=> handleClick()}>{title}</button>
-            <button onTouchEnd={() => handleClick()}>{options[currentIndex]}</button>
+            <button className="flex flex-1" onClick={()=> handleClick()}>{title}</button>
+            <button onClick={() => handleClick()}>{options[currentIndex]}</button>
         </li>
     )
 }

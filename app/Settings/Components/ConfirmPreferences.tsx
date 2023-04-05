@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 import { useStore } from "@/Zustand/store"
 
 const varients = {
-    active: { y: 0, transition: { type: 'spring', damping: 15}},
-    inactive: { y: '100%'},
+    active: { bottom: 0, transition: { type: 'tween', damping: 15}},
+    inactive: { bottom: '-100%'},
 }
 
 const ConfirmPreferences = () => {
@@ -16,7 +16,7 @@ const ConfirmPreferences = () => {
         }))
     }
     return (
-        <motion.div variants={varients} animate={confirmSettingsModel ? 'active' : 'inactive'} className='fixed bottom-0 w-full bg-black z-30 pb-12 pt-8 flex px-8 border-t border-white rounded-t-2xl'>
+        <motion.div variants={varients} animate={confirmSettingsModel ? 'active' : 'inactive'} className='fixed bottom-[-100%] w-full bg-black z-30 pb-12 pt-8 flex px-8 border-t border-white rounded-t-2xl'>
             <button onClick={() => handleConfirm()} className='bg-[#B23928] text-white rounded-lg flex-1 py-4 mx-auto px-4 font-medium text-xl'>Confirm Preferences?</button>
         </motion.div>
     )

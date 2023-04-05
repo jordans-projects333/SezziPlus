@@ -45,7 +45,7 @@ const DataSettings = () => {
     console.log('delete hall of fame bears are cool')
   }
   return (
-    <div className='border-b-[2px] border-zinc-800 pl-2 pr-4 text-lg pt-4'>
+    <div className='border-y-[2px] border-zinc-800 pl-2 pr-4 text-lg pt-4'>
       <AreYouSureModel active={areYouSureModel} actionText={areYouSureText} fadedBackgroundRef={fadedBackground} 
                              cancelFunction={cancelAreYouSureModel} sureFunction={areYouSureFunction} passwordRequired={false}/>
         <div className="flex items-center gap-2">
