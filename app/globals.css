@@ -14,8 +14,8 @@
 }
 
 body{
-  background-color: black;
-   background: linear-gradient(black 0%, #0f0f0f 30%);
+  background-color: blue;
+   /* background: linear-gradient(black 0%, #0f0f0f 30%); */
    min-height: 100vh;
 }
 
