@@ -1,5 +1,7 @@
 import NextAuth, { type NextAuthOptions} from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import { prisma } from "@/lib/prisma";
 import { compare } from "bcrypt";
 import { z } from 'zod'
@@ -14,15 +16,24 @@ export const authOptions: NextAuthOptions = {
     pages: {
         error: '/'
     },
-    secret: process.env.AUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: 'jwt'
     },
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        }),
+        FacebookProvider({
+            clientId: process.env.FACEBOOK_CLIENT_ID!,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
+        }),
         CredentialsProvider({
         name: "Credentials",
         credentials: {},
         async authorize(credentials: any) {
+            console.log('eggshells')
             if(!credentials?.email || !credentials.password){
                 throw new Error('Inputs were not valid')
             }

@@ -2,6 +2,7 @@
 
 import { useStore } from "@/Zustand/store"
 import { DefaultSession } from "next-auth";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 type Props = {
@@ -9,6 +10,9 @@ type Props = {
 }
 
 const SignInButton = ({user}: Props) => {
+    const handleSignOut = async () => {
+        await signOut()
+    }
     const handleAccountModelToggle = () => {
         useStore.setState(() => ({
             accountModelToggle : true
@@ -18,7 +22,8 @@ const SignInButton = ({user}: Props) => {
         <button className="text-white mr-4 font-openSans font-medium" onClick={() => handleAccountModelToggle()}>Sign in</button>
     )
     return(
-        <Link href='/Settings' className="text-white mr-4 font-openSans font-medium">{user?.name}</Link>
+        // <Link href='/Settings' className="text-white mr-4 font-openSans font-medium">{user?.name}</Link>
+        <button onClick={() => handleSignOut()} className="text-white mr-4 font-openSans font-medium">{user?.name}</button>
     )
 }
 

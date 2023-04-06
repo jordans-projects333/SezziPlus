@@ -48,7 +48,7 @@ const AccountSettings = () => {
                 <h2 className='text-gray-300 text-xl'>Account Settings</h2>
             </div>
             <ul className='flex flex-col gap-2 py-2 pl-2'>
-                <YesNoSetting title="Sign Out" yesFunction={() => signOut}/>
+                <YesNoSetting title="Sign Out" yesFunction={signOut}/>
                 <YesNoSetting title="Change Username" yesFunction={changeUsernameModelActive}/>
                 <YesNoSetting title="Change Password" yesFunction={changePasswordModelActive}/>
                 <YesNoSetting title="Delete Account" yesFunction={deleteAccountAreYouSure}/>
