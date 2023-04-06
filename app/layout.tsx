@@ -8,6 +8,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/route'
 import Alert from './Components/Alert/Alert'
 import ExitPageTransitions from '@/utils/Components/ExitPageTransition';
+import ReactQueryProviders from '@/utils/ReactQuery/ReactQueryProviders'
 
 const APP_NAME = "SezziPlus";
 const APP_DESCRIPTION = "Partnership utilities";
@@ -40,14 +41,16 @@ export default async function RootLayout({ children }: {children: React.ReactNod
   return (
     <html lang="en">
       <body>
-        <ClientSessionProvider>
-          <Header/>
-          <ExitPageTransitions>
-          {children}
-          </ExitPageTransitions>
-          {!session && <AccountModel/>}
-          <Alert/>
-        </ClientSessionProvider>
+        <ReactQueryProviders>
+          <ClientSessionProvider>
+            <Header/>
+            <ExitPageTransitions>
+            {children}
+            </ExitPageTransitions>
+            {!session && <AccountModel/>}
+            <Alert/>
+          </ClientSessionProvider>
+        </ReactQueryProviders>
       </body>
     </html>
   )
