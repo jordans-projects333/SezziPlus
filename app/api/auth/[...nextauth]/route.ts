@@ -14,7 +14,7 @@ type CredentialsInput = z.infer<typeof credentialsSchema>
 
 export const authOptions: NextAuthOptions = {
     pages: {
-        error: '/'
+        error: '/',
     },
     secret: process.env.NEXTAUTH_SECRET,
     session: {
