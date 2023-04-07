@@ -7,6 +7,7 @@ import { FormEvent, useRef, useState } from "react";
 import { validateEmail, validatePassword } from "@/utils/Validation/clientSide";
 import { useStore } from "@/Zustand/store";
 import InputField from "./InputField";
+import { json } from "stream/consumers";
 
 const SignInForm = () => {
     const router = useRouter()
@@ -33,8 +34,9 @@ const SignInForm = () => {
             const res = await signIn('credentials', {
                 email: emailInput.current!.value,
                 password: passwordInput.current!.value,
-                redirect: false,
+                redirect: false
             })
+            console.log('res', res)
             if(res!.error === null){
                 useStore.setState(() => ({
                     accountModelToggle : false

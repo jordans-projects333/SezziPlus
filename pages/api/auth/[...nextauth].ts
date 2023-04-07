@@ -16,24 +16,23 @@ export const authOptions: NextAuthOptions = {
     pages: {
         error: '/',
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.AUTH_SECRET,
     session: {
         strategy: 'jwt'
     },
     providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-        }),
-        FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID!,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
-        }),
+        // GoogleProvider({
+        //     clientId: process.env.GOOGLE_CLIENT_ID!,
+        //     clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        // }),
+        // FacebookProvider({
+        //     clientId: process.env.FACEBOOK_CLIENT_ID!,
+        //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
+        // }),
         CredentialsProvider({
         name: "Credentials",
         credentials: {},
         async authorize(credentials: any) {
-            console.log('eggshells')
             if(!credentials?.email || !credentials.password){
                 throw new Error('Inputs were not valid')
             }
@@ -51,12 +50,12 @@ export const authOptions: NextAuthOptions = {
             }
             return {
                 id: user.id + '',
-                email: user.email,
+                email: credentials.email,
                 name: user.name
             }
         }
         })
     ]
 }
-const handler = NextAuth(authOptions)
-export { handler as GET, handler as POST }
+
+export default NextAuth(authOptions)

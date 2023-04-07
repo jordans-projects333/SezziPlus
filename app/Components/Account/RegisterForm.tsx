@@ -44,7 +44,7 @@ function RegisterForm() {
     if(usernameValidated.success && emailValidated.success && passwordValidated.success && duplicatePasswordValidated.success){
         setRequestLoading(true)
         // Post account information
-        const res = await fetch('/api/auth/user', {
+        const res = await fetch('/api/auth/users', {
           headers: {'Content-Type': 'application/json'},
           method: 'POST',
           body: JSON.stringify({

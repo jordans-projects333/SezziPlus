@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { hash } from 'bcrypt'
 import { prisma } from "@/lib/prisma"
 import { z } from 'zod'
@@ -10,18 +10,27 @@ const postSchema = z.object({
 })
 type PostInput = z.infer<typeof postSchema>
 
-export async function POST(req: Request) {
-    const { username, email, password } = await req.json()
+type Data = {
+    error: string
+}
+type Error = {
+    body: string
+}
+
+export default async function handler( req: NextApiRequest, res: NextApiResponse<Data | Error>) {
+    console.log('boogie')
+    const { username, email, password } = req.body
     const postInput: PostInput = { username, email, password }
     if((!(postSchema.safeParse(postInput)).success)){
-        return new NextResponse(JSON.stringify({error: 'Input not valid'}), { status: 500 })
+        return res.status(500).json({ error: 'Input not valid' })
     }
     const hashed = await hash(password, 12)
     try {
         const emailExists = await prisma.user.findUnique({ where: { email }})
-        if(emailExists !== null)return new NextResponse(JSON.stringify({error: 'Email already registered'}), { status: 500 })
+        if(emailExists !== null)return res.status(500).json({ error: 'Email already registered' })
+        
     } catch (error) {
-        return new NextResponse(JSON.stringify({error: 'Unknown server error'}), { status: 500 })
+        return res.status(500).json({ error: 'Unknown server error' })
     }
     try {
         await prisma.user.create({ data: {
@@ -30,7 +39,7 @@ export async function POST(req: Request) {
             password: hashed,
         }})
     } catch (error) {
-        return new NextResponse(JSON.stringify({error: 'Unknown server error'}), { status: 500 })
+        return res.status(500).json({ error: 'Unknown server error' })
     }
-    return new NextResponse(JSON.stringify({}), { status: 200 })
+    return res.status(200).end()
 }

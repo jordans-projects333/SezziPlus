@@ -2,7 +2,7 @@ import { dehydrate } from "@tanstack/query-core"
 import getQueryClient from "@/utils/ReactQuery/GetQueryClient"
 import Hydrate from "@/utils/ReactQuery/HydrateClient"
 import { getServerSession } from 'next-auth'
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import { prisma } from "@/lib/prisma"
 import Reminder from "./Components/Reminder"
 

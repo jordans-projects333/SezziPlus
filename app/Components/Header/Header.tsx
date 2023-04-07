@@ -2,7 +2,7 @@ import Navbar from "./Navbar"
 import SettingsLink from "./SettingsLink"
 import SignInButton from "./SignInButton"
 import { getServerSession } from 'next-auth'
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 // import getQueryClient from '@/utils/ReactQuery/GetQueryClient'
 import { prisma } from '@/lib/prisma'
 

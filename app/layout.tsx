@@ -5,7 +5,7 @@ import Header from './Components/Header/Header'
 import './globals.css'
 import '../public/manifest.json'
 import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]/route'
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Alert from './Components/Alert/Alert'
 import ExitPageTransitions from '@/utils/Components/ExitPageTransition';
 import ReactQueryProviders from '@/utils/ReactQuery/ReactQueryProviders'
