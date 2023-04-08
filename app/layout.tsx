@@ -8,7 +8,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Alert from './Components/Alert/Alert'
 import ExitPageTransitions from '@/utils/Components/ExitPageTransition';
-import ReactQueryProviders from '@/utils/ReactQuery/ReactQueryProviders'
+import ReactQueryProviders from '@/lib/ReactQuery/ReactQueryProviders'
 
 const APP_NAME = "SezziPlus";
 const APP_DESCRIPTION = "Partnership utilities";

@@ -18,7 +18,6 @@ type Error = {
 }
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse<Data | Error>) {
-    console.log('boogie')
     const { username, email, password } = req.body
     const postInput: PostInput = { username, email, password }
     if((!(postSchema.safeParse(postInput)).success)){
