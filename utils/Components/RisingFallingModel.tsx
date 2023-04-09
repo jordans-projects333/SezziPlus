@@ -14,7 +14,7 @@ type Props = {
     active: boolean,
     cancelFunction: (e: any) => void,
     fadedBackgroundRef: React.RefObject<HTMLDivElement>,
-    tailwindStyles: string
+    tailwindStyles?: string
 }
 
 const RisingFallingModel = ({children, active, cancelFunction, fadedBackgroundRef, tailwindStyles}: Props) => {

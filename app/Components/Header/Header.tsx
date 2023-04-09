@@ -9,7 +9,7 @@ import { prisma } from '@/lib/prisma'
 const Header = async () => {
   const session = await getServerSession(authOptions)
   return (
-    <header className='flex flex-col bg-black'>
+    <header className='flex flex-col bg-black sticky top-0 z-50'>
         <div className="flex items-center">
             <h1 className='text-white text-3xl ml-2 my-2 font-montserrat'>Sezzi+</h1>
             <div className="ml-auto mr-2 flex">

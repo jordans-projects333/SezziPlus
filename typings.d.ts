@@ -8,3 +8,12 @@ export type Point = {
     x?: number,
     y?: number
 }
+
+export type DestructuredReminderData = {
+    id: string,
+    date: string,
+    time: string,
+    message: string,
+    goal: number,
+    type: string
+}
