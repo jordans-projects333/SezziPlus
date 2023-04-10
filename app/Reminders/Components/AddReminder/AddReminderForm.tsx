@@ -4,7 +4,9 @@ import { FormEvent, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import ReminderInput from "../ReminderInput"
-import { dateValidation, goalValidation, messageValidation, timeValidation } from "@/utils/Validation/ReminderValidation"
+import { reminderValidation } from "@/utils/Validation/Reminders/clientSide"
+import { useStore } from "@/Zustand/store"
+import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
     currentReminder: string,
@@ -13,7 +15,6 @@ type Props = {
 
 const AddReminderForm = ({currentReminder, setReminderSelected}: Props) => {
     const [addReminderLoading, setAddReminderLoading] = useState(false)
-    const [serverError, setServerError] = useState('')
     const [messageError, setMessageError] = useState('')
     let messageInput = useRef<HTMLInputElement>(null)
     const [dateError, setDateError] = useState('')
@@ -23,42 +24,64 @@ const AddReminderForm = ({currentReminder, setReminderSelected}: Props) => {
     const [goalError, setGoalError] = useState('')
     let goalInput = useRef<HTMLInputElement>(null)
     const queryClient = useQueryClient()
-    const addReminder = (e: FormEvent<HTMLFormElement>) => {
+
+    const addMutation = useMutation({
+        mutationFn: async () => {
+            const res = await fetch('/api/reminders', {
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST',
+                body: JSON.stringify({
+                    message: messageInput.current!.value,
+                    date: (dateInput.current === null) ? '' : dateInput.current.value,
+                    time: (timeInput.current === null) ? '' : timeInput.current.value,
+                    goal: (goalInput.current === null || goalInput.current.value === '') ? 0 : parseInt(goalInput.current.value),
+                    type: currentReminder
+                })
+            })
+            if(res.status !== 200){
+                const errorMessage = (await res.json()).error
+                useStore.setState(() => ({
+                    alertActive: true,
+                    alertMessage: errorMessage
+                }))
+            }
+            setAddReminderLoading(false)
+        },
+        onMutate: async () => {
+            // cancel outgoing fetches
+            await queryClient.cancelQueries({ queryKey: ['Reminders']})
+            // get snapshot
+            const previousState: any = queryClient.getQueryData(['Reminders'])
+            queryClient.setQueryData(['Reminders'], 
+            [...previousState, {
+                id: uuidv4(),
+                message: messageInput.current!.value,
+                date: (dateInput.current === null) ? '' : dateInput.current.value,
+                time: (timeInput.current === null) ? '' : timeInput.current.value,
+                goal: (goalInput.current === null || goalInput.current.value === '') ? 0 : parseInt(goalInput.current.value),
+                type: currentReminder}]
+            )
+            return { previousState }
+        },
+        onError: (err, post, context) => {
+            queryClient.setQueryData(['Reminders'], context?.previousState)
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({queryKey: ['Reminders']})
+        }
+    })
+    const addReminder = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // Message Validation
-        if(addReminderLoading)return
-        const messageValidated = messageValidation(messageInput.current!.value)
-        if(!messageValidated.success){
-            setMessageError(messageValidated.error)
-        }else{
-            if(messageError !== '')setMessageError('')
-        }
-        // Date Validation
-        if(currentReminder === 'text'){
-            const dateValidated = dateValidation(dateInput.current!.value)
-            if(!dateValidated.success){
-                setDateError(dateValidated.error)
-            }else{
-                if(dateError !== '')setDateError('')
-            }
-        }
-        // Time Validation
-        if(currentReminder === 'text'){
-            const timeValidated = timeValidation(timeInput.current!.value, dateInput.current!.value)
-            if(!timeValidated.success){
-                setTimeError(timeValidated.error)
-            }else{
-                if(timeError !== '')setTimeError('')
-            }
-        }
-        // Goal Validation
-        if(goalInput.current !== null && goalInput.current?.value !== ''){
-            const goalValidated = goalValidation(goalInput.current!.value)
-            if(!goalValidated.success){
-                setGoalError(goalValidated.error)
-            }else{
-                if(goalError !== '')setGoalError('')
-            }
+        const successfulValidation = reminderValidation(addReminderLoading, 
+            currentReminder, messageInput.current!.value, messageError, setMessageError,
+             dateError, setDateError, timeError, setTimeError,
+            goalInput.current, goalError, setGoalError, dateInput.current?.value, timeInput.current?.value, goalInput.current?.value)
+        if(successfulValidation){
+            setAddReminderLoading(true)
+            useStore.setState(() => ({
+                addReminderModelToggle : false
+            }))
+            addMutation.mutate()
         }
     }
     return (
@@ -66,21 +89,19 @@ const AddReminderForm = ({currentReminder, setReminderSelected}: Props) => {
             {/* Inputs */}
             {((currentReminder === 'text' || currentReminder === 'general')) && 
             <>
-                <ReminderInput title={"Date"} optional={(currentReminder === 'general')} inputType={'date'} inputRef={dateInput} inputError={dateError}/>
-                <ReminderInput title={"Time"} optional={(currentReminder === 'general')} inputType={'time'} inputRef={timeInput} inputError={timeError}/>
+                <ReminderInput title={"Date"} optional={(currentReminder === 'general')} inputType={'date'} inputRef={dateInput} inputError={dateError} setInputError={setDateError}/>
+                <ReminderInput title={"Time"} optional={(currentReminder === 'general')} inputType={'time'} inputRef={timeInput} inputError={timeError} setInputError={setTimeError}/>
             </>}
             {((currentReminder !== 'text' && currentReminder !== 'general')) && 
             <>
-                <ReminderInput title={"Goal"} optional={true} inputType={'number'} inputRef={goalInput} inputError={goalError}/>
+                <ReminderInput title={"Goal"} optional={true} inputType={'number'} inputRef={goalInput} inputError={goalError} setInputError={setGoalError}/>
             </>}        
             {/* Text Area */}
-            <ReminderInput title={"Reminder"} optional={false} inputRef={messageInput} inputError={messageError}/>
-            {/* Server Error */}
-            <p className="text-red-500 text-center mb-1">{serverError}</p>
+            <ReminderInput title={"Reminder"} optional={false} inputRef={messageInput} inputError={messageError} setInputError={setMessageError}/>
             {/* Add Reminder Button */}
             <div className="flex w-full">
                 <button type="submit" className={`${addReminderLoading && 'scale-90'} bg-[#424242] mx-auto duration-200 text-white text-xl font-medium w-[80%] py-2 mb-4 rounded`}>
-                    {addReminderLoading ? 'Loading' : 'Add'}
+                    {addReminderLoading ? 'Loading Last Request' : 'Add'}
                 </button>
             </div>
         </motion.form>

@@ -39,7 +39,7 @@ const DrawPage = () => {
         ctx.fill()
     }
     return (
-        <div>
+        <div className=' overflow-hidden'>
             <div ref={canvasContainerRef} className="w-[95%] aspect-[3/2] mt-4 mx-auto border border-black bg-white">
                 <canvas ref={canvasRef} onMouseDown={onMouseDown} onTouchMove={(e) => e.preventDefault()} onTouchStart={onMouseDown} height={canvasHeight} width={canvasWeight} className='border border-black'/>
             </div>

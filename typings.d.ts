@@ -17,3 +17,12 @@ export type DestructuredReminderData = {
     goal: number,
     type: string
 }
+
+export type JWTSession = {
+    user: {
+        name: string,
+        email: string,
+        image: string,
+        id: string
+    }
+}

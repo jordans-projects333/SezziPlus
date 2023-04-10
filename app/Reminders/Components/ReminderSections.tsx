@@ -9,17 +9,16 @@ import MonthlySection from "./ReminderSection/MonthlySection"
 import GeneralSection from "./ReminderSection/GeneralSection"
 
 const ReminderSections = () => {
-    // const {data, isLoading, isError, error} = useQuery({
-    //     queryKey: ['Reminders'],
-    //     queryFn: async () => {
-    //         const res = await fetch('/api/Reminders/getReminders')
-    //         const data = await res.json()
-    //         return data.data.reminders
-    //     }
-    // }) 
-    const data: string | any[] = []
+    const {data, isLoading, isError, error} = useQuery({
+        queryKey: ['Reminders'],
+        queryFn: async () => {
+            const res = await fetch('/api/reminders')
+            const data = await res.json()
+            return data.reminders
+        }
+    }) 
     return (
-        <>
+        <div className="pb-16">
             <TextSection data={data}/>
             <DailySection data={data}/>
             <WeeklySection data={data}/>
@@ -29,7 +28,7 @@ const ReminderSections = () => {
             <div className="flex w-full mt-20 justify-center items-center">
                 <AddReminderButton/>
             </div>}
-        </>
+        </div>
     )
 }
 

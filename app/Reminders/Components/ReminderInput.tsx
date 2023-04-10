@@ -7,10 +7,11 @@ type Props = {
     optional: boolean,
     inputRef: any,
     inputError: string,
-    inputType?: string
+    inputType?: string,
+    setInputError: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ReminderInput = ({title, optional, inputRef, inputError, inputType}: Props) => {
+const ReminderInput = ({title, optional, inputRef, inputError, inputType, setInputError }: Props) => {
     const [focus, setFocus] = useState(false)
     return (
         <div className={`relative group mt-8`}>
@@ -25,10 +26,10 @@ const ReminderInput = ({title, optional, inputRef, inputError, inputType}: Props
             {(title === 'Reminder') ? 
                 <textarea ref={inputRef} maxLength={200}
                           className={`py-2 pl-2 px-4 h-[20vh] bg-transparent text-lg w-full text-white focus:outline-none`} 
-                          onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}/>
+                          onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} onChange={() => {if(inputError !== '')setInputError('')}}/>
             :
                 <input ref={inputRef} type={inputType} className={`py-2 pl-2 px-4 bg-transparent w-full text-white focus:outline-none`} 
-                       onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}/>
+                       onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} defaultValue={(title === 'Goal') ? 1 : ''} onChange={() => {if(inputError !== '')setInputError('')}}/>
             }
         </div>
     )

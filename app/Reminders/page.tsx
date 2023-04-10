@@ -8,29 +8,28 @@ import Reminder from "./Components/Reminder"
 import ReminderSections from "./Components/ReminderSections"
 import AddReminderButton from "./Components/AddReminder/AddReminderButton"
 import AddReminderModel from './Components/AddReminder/AddReminderModel'
+import { JWTSession } from "@/typings"
 
 const RemindersPage = async () => {
-    // const getReminders = async () => {
-    //     const session = await getServerSession(authOptions)
-    //     const tee = session!.user!.id
-    //     if(session){
-    //         const data = await prisma.user.findUnique({ where: { id: }, include : { reminders: true}})
-    //         return data?.reminders
-    //     }
-    // }
+    const getReminders = async () => {
+        const session: JWTSession | null = await getServerSession(authOptions)
+        if(session){
+            const data = await prisma.user.findUnique({ where: { id: session.user!.id }, select : { reminders: true }})
+            return data?.reminders
+        }
+    }
     const session = await getServerSession(authOptions)
     if(session){
-        console.log(session)
-        // const queryClient = getQueryClient()
-        // await queryClient.prefetchQuery(['Reminders'], getReminders)
-        // const dehydratedState = dehydrate(queryClient)
+        const queryClient = getQueryClient()
+        await queryClient.prefetchQuery(['Reminders'], getReminders)
+        const dehydratedState = dehydrate(queryClient)
         return (
             <>
                 <AddReminderModel/>
                 {/* <EditModel/> */}
-                {/* <Hydrate state={dehydratedState}> */}
+                <Hydrate state={dehydratedState}>
                     <ReminderSections/>
-                {/* </Hydrate> */}
+                </Hydrate>
             </>
         )}
         return(

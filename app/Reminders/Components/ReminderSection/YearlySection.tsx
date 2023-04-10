@@ -16,8 +16,8 @@ const YearlySection = ({data}: Props) => {
         <>
             {yearlyReminders.length !== 0 &&
             <motion.div className="overflow-x-hidden" initial={{ opacity: 0 }} whileInView={{opacity: 1}} viewport={{ once: true }}>
-                <div className="w-full flex justify-between items-end mt-12 border-b border-gray-400">
-                    <h3 className="ml-1 mb-1 text-2xl text-white">Weekly Reminders</h3>
+                <div className="w-full flex justify-between items-end mt-6 border-b border-gray-400">
+                    <h3 className="ml-1 mb-1 text-2xl text-white">Yearly Reminders</h3>
                     <AddReminderButton/>
                 </div>
                 <ResizableComponent>
