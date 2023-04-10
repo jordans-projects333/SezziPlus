@@ -1,15 +1,15 @@
-'use client'
-//server component
-// import getServerSession from next-auth and authOptins from file
-// const session = await getServerSession(authoptions)
+import { Message } from "../typings"
+import redis from "@/lib/redis"
+import ChatInput from "./Components/MessagesPage/ChatInput"
 
-import { useSession } from 'next-auth/react'
-
-export default function Home() {
-  const {data:session} = useSession()
+export default async function Home() {
+  // const messageRes = await redis.hvals('messages')
+  // const messages : Message[] = messageRes.map((message) => JSON.parse(message)).sort((a, b) => b.created_at - a.created_at)
+  // console.log(messages)
   return (
-    <main>
-      <h3 className='text-white text-3xl fadeIntro'>Hello</h3>
-    </main>
+    <>
+      {/* <MessageList initialMessages={messages}/> */}
+      <ChatInput/>
+    </>
   )
 }

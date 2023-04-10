@@ -7,6 +7,7 @@ import DailySection from "./ReminderSection/DailySection"
 import WeeklySection from "./ReminderSection/WeeklySection"
 import MonthlySection from "./ReminderSection/MonthlySection"
 import GeneralSection from "./ReminderSection/GeneralSection"
+import YearlySection from "./ReminderSection/YearlySection"
 
 const ReminderSections = () => {
     const {data, isLoading, isError, error} = useQuery({
@@ -23,6 +24,7 @@ const ReminderSections = () => {
             <DailySection data={data}/>
             <WeeklySection data={data}/>
             <MonthlySection data={data}/>
+            <YearlySection data={data}/>
             <GeneralSection data={data}/>
             {data.length === 0 && 
             <div className="flex w-full mt-20 justify-center items-center">
