@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: {children: React.ReactNod
   const session = await getServerSession(authOptions)
   return (
     <html lang="en">
-      <body className=' overflow-hidden'>
+      <body>
         <ReactQueryProviders>
           <ClientSessionProvider>
             <Header/>

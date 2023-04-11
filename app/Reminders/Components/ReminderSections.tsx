@@ -2,6 +2,7 @@
 
 import AddReminderButton from "./AddReminder/AddReminderButton"
 import { useQuery } from "@tanstack/react-query"
+import getReminders from "@/utils/ReactQueries/GetReminders"
 import TextSection from "./ReminderSection/TextSection"
 import DailySection from "./ReminderSection/DailySection"
 import WeeklySection from "./ReminderSection/WeeklySection"
@@ -12,11 +13,7 @@ import YearlySection from "./ReminderSection/YearlySection"
 const ReminderSections = () => {
     const {data, isLoading, isError, error} = useQuery({
         queryKey: ['Reminders'],
-        queryFn: async () => {
-            const res = await fetch('/api/reminders')
-            const data = await res.json()
-            return data.reminders
-        }
+        queryFn: getReminders
     }) 
     return (
         <div className="pb-16">
