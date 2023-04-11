@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import homeImage from '@/Images/homeImage.jpg'
+import homeImage from '@/Images/HomeImage.jpg'
 import { motion } from "framer-motion"
 import { useRef, useState } from "react";
 
