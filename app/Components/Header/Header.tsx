@@ -18,6 +18,8 @@ const Header = async () => {
             </div>
         </div>
         <Navbar/>
+        {/* Black top portion for pwa, covers battery/time */}
+        <div className="w-full h-[300%] absolute bg-black bottom-[100%]"></div>
     </header>
   )
 }

@@ -67,7 +67,7 @@ const ChatInput = () => {
     }
     return (
         <div className={`fixed bottom-0 z-50 w-full flex flex-col`}>
-        <form onSubmit={(e) => addMessage(e)} className={`flex px-4 py-2 space-x-2 border-t border-gray-100 bg-zinc-800  ${pathname !== '/' && 'hidden'}`}>
+        <form onSubmit={(e) => addMessage(e)} className={`flex px-4 py-2 space-x-2 pb-2 bg-[#424242]  ${pathname !== '/' && 'hidden'}`}>
             <textarea ref={inputElement} value={input} placeholder='Enter message here...' onChange={(e) => setInput(e.target.value)} disabled={session == null}
             className='flex-1 rounded border-gray-300 text-white focus:outline-none bg-zinc-700 focus:ring-2 focus:ring-blue-400 max-h-36
                     focus:border-transparent px-5 py-3 disabled:opacity-50 disabled:cursor-not-allowed'/>

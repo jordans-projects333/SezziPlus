@@ -7,7 +7,7 @@ const Navbar = () => {
     const pathname = usePathname();
     return (
         <nav className='opacity-1'>
-            <ul className='flex mx-2 gap-2 text-white overflow-auto font-openSans font-medium'>
+            <ul className='flex mx-2 gap-2 text-white overflow-auto font-openSans font-medium pb-2'>
                 <li className={`${pathname === '/' && 'bg-[#B23928]'} bg-[#424242] px-3 py-[2px] rounded duration-300 flex-shrink-0`}><ExitPageTransitionButton link='/'>Messages</ExitPageTransitionButton></li>
                 <li className={`${pathname === '/Notes' && 'bg-[#B23928]'} bg-[#424242] px-3 py-[2px] rounded duration-300 flex-shrink-0`}><ExitPageTransitionButton link='/Notes'>Notes</ExitPageTransitionButton></li>
                 <Link href={'/Reminders'}><li className={`${pathname === '/Reminders' && 'bg-[#B23928]'} bg-[#424242] px-3 py-[2px] rounded duration-300 flex-shrink-0`}>Reminders</li></Link>
